@@ -23,3 +23,25 @@ window.onload = function() {
     ]
 };
 
+// crear variables del pedido, total, localstorage e items
+let pedido = [];
+let total = 0;
+const DOMitems = document.querySelector('#items');
+const DOMPedido = document.querySelector('#Pedido');
+const DOMtotal = document.querySelector('#total');
+const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+const milocalStorage = window.localStorage;
+
+// crear funciones
+
+/**
+ * @params sin parametros, funcion renderizar los productos, hace la captura de los productos que están en la base de datos
+ */
+
+function renderizarProductos() {
+    // recorrer la base de datos con un foreach
+    baseDeDatos.forEach((info) => {
+        // estructura 
+    });
+    
+}
