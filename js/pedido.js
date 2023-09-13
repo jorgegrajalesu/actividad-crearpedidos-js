@@ -122,5 +122,7 @@ window.onload = function() {
         });
     
     }
+
+    renderizarProductos();
 }
 
