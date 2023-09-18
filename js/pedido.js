@@ -159,9 +159,34 @@ window.onload = function() {
         
     }
 
-
-
     // borrar item del pedido
+    function borrarItemPedido(evento) {
+        const id = evento.target.dataset.item;
+        // filtrar 
+        Pedido = Pedido.filter((PedidoId) =>{
+            return PedidoId !== id;
+        });
+        
+        // llamar el pedido
+        renderizarPedido();
+        // calculo
+        calcularTotal();
+        // actualizar el localstorage
+        guardarPedidoLocalStorage();
+    }
+
+    // vaciar el pedido
+
+    function vaciarPedido() {
+        // vaciar todos los productos pedidos o guardados
+        Pedido = [];
+        // renderizar el pedido
+        renderizarPedido();
+        calcularTotal();
+        // borrar el localstorage
+        localStorage.clear();
+        
+    }
 
 
 
