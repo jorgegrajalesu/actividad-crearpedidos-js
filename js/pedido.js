@@ -15,7 +15,7 @@ window.onload = function() {
             imagen:'/images/hamburger.jpg'
         },
         {
-            id: 1,
+            id: 3,
             nombre:'Pizza',
             precio:8000,
             imagen:'/images/pizza.jpg'
@@ -123,6 +123,55 @@ window.onload = function() {
     
     }
 
+    // funcion para calcular total del pedido
+
+    function calcularTotal() {
+        // vaciar el total anterior
+        total = 0;
+        // recorrer el array del pedido
+        Pedido.forEach((item)=>{
+            // de cada producto obtener el precio
+            const miItem = baseDeDatos.filter((itemBaseDatos)=>{
+                // retornar el valor
+                return itemBaseDatos.id === parseInt(item);
+            });
+            // se hace el calculo
+            total = total + miItem[0].precio;
+
+        });
+        // imprimir el total
+        DOMtotal.textContent = total.toFixed(2);
+        
+    }
+
+
+    // guardar en el localstorage
+    function guardarPedidoLocalStorage() {
+        milocalStorage.setItem('Pedido',JSON.stringify(Pedido));        
+    }
+
+    // cargar el pedido al localstorage
+    function cargarLocalStorage() {
+        if(milocalStorage.getItem('Pedido') !== null) {
+            // carga la información
+            Pedido = JSON.parse(milocalStorage.getItem('Pedido')); 
+        }
+        
+    }
+
+
+
+    // borrar item del pedido
+
+
+
+
+
+
+    // llamar las funciones
+
     renderizarProductos();
+
+    
 }
 
