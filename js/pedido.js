@@ -23,7 +23,7 @@ window.onload = function() {
     ]
 
     // crear variables del pedido, total, localstorage e items
-    let pedido = [];
+    let Pedido = [];
     let total = 0;
     const DOMitems = document.querySelector('#items');
     const DOMPedido = document.querySelector('#Pedido');
@@ -66,7 +66,7 @@ window.onload = function() {
             const miNodoBoton = document.createElement('button');
             miNodoBoton.classList.add('btn', 'btn-primary');
             miNodoBoton.textContent = 'Agregar';
-            miNodoBoton.setAttribute('marcador',info.id);
+            miNodoBoton.setAttribute('marcador', info.id);
             miNodoBoton.addEventListener('click', agregarProducto);
 
             // insertar los elementos de la base de datos a sus respectivas etiquetas html
@@ -89,7 +89,13 @@ window.onload = function() {
      */
     function agregarProducto(evento) {
         // tener presente la etiqueta ul con id=Pedido, en el index, para agregar el producto
-        Pedido.push(evento.target.setAttribute('marcador'));
+        Pedido.push(evento.target.getAttribute('marcador'))
+        // calcular el total
+        calcularTotal();
+        // pedido
+        renderizarPedido();
+        // guardar en localstorage
+        guardarPedidoLocalStorage();
     }
 
     // crear la función para el pedido
@@ -114,10 +120,16 @@ window.onload = function() {
             const miNodo = document.createElement('li');
             miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
             miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}`;
+            // Boton
+            const miBoton = document.createElement('button');
+            miBoton.classList.add('btn', 'btn-danger','mx-5');
+            miBoton.textContent = 'X';
+            miBoton.style.marginLeft = '1rem';
+            miBoton.dataset.item = item;
+            miBoton.addEventListener('click',borrarItemPedido);
 
-
-
-
+            miNodo.appendChild(miBoton);
+            DOMPedido.appendChild(miNodo);
 
         });
     
@@ -188,14 +200,16 @@ window.onload = function() {
         
     }
 
+    // evento
 
-
-
+    DOMbotonVaciar.addEventListener('click', vaciarPedido);
 
 
     // llamar las funciones
-
     renderizarProductos();
+    renderizarPedido();
+    calcularTotal();
+    cargarLocalStorage();
 
     
 }
